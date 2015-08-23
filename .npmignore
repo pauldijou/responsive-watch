@@ -1,4 +1,5 @@
 examples
 src
+scripts
 dist
 webpack.config.js
