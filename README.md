@@ -57,7 +57,7 @@ watchers.status();
 
 **Does it support IE6?** Not out of the box. It only needs the `matchMedia` function. You can find great [polyfills](https://github.com/paulirish/matchMedia.js) online.
 
-**Is it possible to have multiple instances of responsive watch?** Yes. Just call the `responsiveWatch` as many time as you need.
+**Is it possible to have multiple instances of responsive watch?** Yes. Just call the `responsiveWatch` as many times as you need.
 
 **Could you describe a use case for this lib?** I'm using it inside my React applications. When I need responsive inline styles, I plug the lib with my Flux dispatcher so each time the callback is called, it will update a store and impact all my components to re-render with the new style.
 
@@ -92,6 +92,7 @@ An object with map your options to a boolean depending if the media query curren
 
 - `sizes`: for each `options.size`, will create a key with the name of the size. Among all sizes, only one can be `true` while all other will be `false`.
 - `orientations`: got two keys, `landscape` and `portrait`, one `true` and the other `false` depending on the screen.
+- `medias`: one key for each type of media. All `false` except for one.
 - `queries`: for each `options.queries`, will create a key with the name of the query and the value will be if it currently matches or not.
 - `lt`, `lte`, `gt`, `gte`: each of those keys will contains an object with all the size names. Each one indicates if we are currently lower than (`lt`), lower or equal than (`lte`), greater than (`gt`) or greater or equal than (`gte`) compared to the current size. For example, if `status.lte.medium` is true, it means the width of the screen is currently smaller or equal to the medium size.
 
