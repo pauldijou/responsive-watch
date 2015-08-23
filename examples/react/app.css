@@ -1,0 +1,23 @@
+#content {
+  max-width: 600px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+section {
+  margin-bottom: 50px;
+}
+
+h1, h2, ul, p {
+  text-align: center;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+pre {
+  background-color: #ddd;
+  padding: 10px;
+}

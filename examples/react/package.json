@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "react": "0.14.0-beta3",
+    "react-dom": "0.14.0-beta3",
+    "redux": "1.0.1",
+    "react-redux": "0.9.0",
+    "redux-act": "0.1.1"
+  }
+}
