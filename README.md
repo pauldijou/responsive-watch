@@ -61,6 +61,11 @@ watchers.status();
 
 **Could you describe a use case for this lib?** I'm using it inside my React applications. When I need responsive inline styles, I plug the lib with my Flux dispatcher so each time the callback is called, it will update a store and impact all my components to re-render with the new style.
 
+## Examples
+
+- Pure JavaScipe: [demo](http://pauldijou.fr/responsive-watch/examples/basic/) - [source code](https://github.com/pauldijou/responsive-watch/tree/master/examples/basic)
+- React: [demo](http://pauldijou.fr/responsive-watch/examples/react/) - [source code](https://github.com/pauldijou/responsive-watch/tree/master/examples/react)
+
 ## API
 
 `responsiveWatch(options, callback)`
