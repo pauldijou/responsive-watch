@@ -77,7 +77,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _ref$medias = _ref.medias;
 	  var medias = _ref$medias === undefined ? false : _ref$medias;
 	  var _ref$queries = _ref.queries;
-	  var queries = _ref$queries === undefined ? [] : _ref$queries;
+	  var queries = _ref$queries === undefined ? {} : _ref$queries;
 	  var _ref$check = _ref.check;
 	  var check = _ref$check === undefined ? true : _ref$check;
 
@@ -129,10 +129,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (typeof medias !== 'boolean') {
 	      throw new Error('options.medias must be a boolean');
-	    }
-
-	    if (!Array.isArray(options.queries)) {
-	      throw new Error('options.queries must be an array');
 	    }
 
 	    if (typeof cb !== 'function') {
@@ -227,9 +223,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  // Create all custom watchers
-	  queries.forEach(function (query) {
-	    watchers.orientations[query.name] = matchMedia(query.query);
-	    watchers.orientations[query.name].addListener(callback);
+	  Object.keys(queries).forEach(function (query) {
+	    watchers.queries[query] = matchMedia(queries[query]);
+	    watchers.queries[query].addListener(callback);
 	  });
 
 	  // Save all keys just so we don't have to compute them every time
@@ -242,26 +238,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  });
 
-	  function matchSizes(sizes) {
-	    var _this = this;
+	  var sizesHash = {};
 
+	  sizes.forEach(function (size) {
+	    sizesHash[size.name] = size;
+	  });
+
+	  function matchSizes(result, sizes) {
 	    return sizes.reduce(function (acc, size) {
-	      return acc || _this[size];
+	      return acc || result.sizes[size.name];
 	    }, false);
 	  }
 
 	  var sizeUtils = {
-	    gt: function gt(size) {
-	      return matchSizes(sizes.slice(sizes.indexOf(size) + 1));
+	    gt: function gt(result, size) {
+	      return matchSizes(result, sizes.slice(sizes.indexOf(size) + 1));
 	    },
-	    gte: function gte(size) {
-	      return matchSizes(sizes.slice(sizes.indexOf(size)));
+	    gte: function gte(result, size) {
+	      return matchSizes(result, sizes.slice(sizes.indexOf(size)));
 	    },
-	    lt: function lt(size) {
-	      return matchSizes(sizes.slice(0, sizes.indexOf(size)));
+	    lt: function lt(result, size) {
+	      return matchSizes(result, sizes.slice(0, sizes.indexOf(size)));
 	    },
-	    lte: function lte(size) {
-	      return matchSizes(sizes.slice(0, sizes.indexOf(size) + 1));
+	    lte: function lte(result, size) {
+	      return matchSizes(result, sizes.slice(0, sizes.indexOf(size) + 1));
 	    }
 	  };
 
@@ -270,7 +270,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var result = {};
 
 	    // Assign a bunch of true/false flags for all media queries
-	    Object.keys(keys).forEact(function (level1) {
+	    Object.keys(keys).forEach(function (level1) {
 	      keys[level1].forEach(function (level2) {
 	        if (!result[level1]) {
 	          result[level1] = {};
@@ -283,12 +283,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // Add all size comparators
 	    if (keys.sizes.length > 1) {
 	      ['gt', 'gte', 'lt', 'lte'].forEach(function (comp) {
-	        keys.sizes.forEach(function (size) {
+	        keys.sizes.forEach(function (sizeName) {
 	          if (!result[comp]) {
 	            result[comp] = {};
 	          }
 
-	          result[comp][size] = sizeUtils[comp](size);
+	          result[comp][sizeName] = sizeUtils[comp](result, sizesHash[sizeName]);
 	        });
 	      });
 	    }
