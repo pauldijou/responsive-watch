@@ -63,7 +63,7 @@ watchers.status();
 
 ## Examples
 
-- Pure JavaScipe: [demo](http://pauldijou.fr/responsive-watch/examples/basic/) - [source code](https://github.com/pauldijou/responsive-watch/tree/master/examples/basic)
+- Pure JavaScript: [demo](http://pauldijou.fr/responsive-watch/examples/basic/) - [source code](https://github.com/pauldijou/responsive-watch/tree/master/examples/basic)
 - React: [demo](http://pauldijou.fr/responsive-watch/examples/react/) - [source code](https://github.com/pauldijou/responsive-watch/tree/master/examples/react)
 
 ## API
@@ -77,7 +77,7 @@ Return an object with one method `status` which return the current status.
 - `sizes` (default `[]`): an array of `{name, breakpoint, unit}`. The breakpoint is the max width before switching to the next size. This is why the last size doesn't need any breakpoint. You can mix different units but shouldn't do it.
 - `orientations` (default `true`): a boolean to enable or disable orientation watchers. Results are in `status.orientations.landscape` and `status.orientations.portrait`.
 - `medias` (default `true`): a boolean to enable or disable media watchers (screen, print, tv, ...). Results are in `status.medias`.
-- `queries` (default `[]`): an array of `{name, query}`. You can create custom media queries. The result will be in `status.querys[name]`.
+- `queries` (default `{}`): an object where keys are query names and values, as string, are the actual queries. You can create custom media queries. The result will be in `status.querys[name]`.
 - `check` (default `true`): enable or disable all checks to see if options seems valid.
 
 **Warning** There is no check to test if all size breakpoints are each bigger than the previous one if you mix different units inside your sizes. That's because it would be just impossible since some units are not absolute.
